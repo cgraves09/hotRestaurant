@@ -9,41 +9,60 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //  Data
-let reservation = [];
-let waitList = [];
+let reservation = [
+  {
+    name: 'Chris',
+    phone: '561-866-7644',
+    email: 'test@gmail.com',
+    uniqueId: 1234564
+
+  }
+  ];
+let waitList = [
+  {
+    name: 'Chris',
+    phone: '561-866-7644',
+    email: 'test@gmail.com',
+    uniqueId: 1234564
+  }
+  ];
 // Routes
 app.get('/', function(req,res){
   res.sendFile(path.join(__dirname, 'home.html'))
 });
 
-app.get('/tables', function(req,res){
-  res.sendFile(path.join(__dirname, 'tables.html'));
+app.get('/view', function(req,res){
+  res.sendFile(path.join(__dirname, 'view.html'));
 });
 
-app.get('/reserve', function(req,res){
-  res.sendFile(path.join(__dirname, 'reserve.html'));
+app.get('/make', function(req,res){
+  res.sendFile(path.join(__dirname, 'make.html'));
 });
 
-app.get('/api/tables',function(req,res){
-  return res.json(reservation, waitlist)
+app.get('/api/reservations',function(req,res){
+  return res.json(reservation);
+});
+
+app.get('/api/waitingList',function(req,res){
+  return res.json(waitList);
 });
 
 app.post("/api/reservations", function(req, res) {
   let newReservation = req.body;
   if(reservation.length >= 5){
     app.post("/api/waitingList", function(req, res){
-
+      
       waitList.push(newReservation);
       res.json(newReservation);
     })
     
   }
   else{
+
     reservation.push(newReservation);
     res.json(newReservation);
   }
   
- 
 });
 
 

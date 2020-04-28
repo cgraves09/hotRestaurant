@@ -2,12 +2,8 @@
 <html>
   <head>
     <title>Hot Restaurant</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
@@ -19,13 +15,13 @@
         <h2 class="text-center">Book your seat before they are all gone!</h2>
         <br />
         <div class="text-center">
-          <a href="/make.html"
-            ><button type="button" class="btn btn-lg btn-danger">
+          <a href="/make">
+            <button type="button" class="btn btn-lg btn-danger">
               <span class="glyphicon glyphicon-credit-card"></span> Make
               Reservation
-            </button></a
-          >
-          <a href="/home.html"
+            </button></a>
+
+          <a href="/"
             ><button type="button" class="btn btn-lg btn-default">
               <span class="glyphicon glyphicon-home"></span></button
           ></a>
@@ -55,8 +51,8 @@
           <p>Control Panel</p>
           <p>
             <a href="#" id="clear">Clear Table</a> |
-            <a href="/api/tables">API Table Link</a> |
-            <a href="/api/waitlist">API Wait List</a>
+            <a href="/api/reservations">API Table Link</a> |
+            <a href="/api/waitingList">API Wait List</a>
           </p>
         </div>
       </footer>
@@ -69,7 +65,7 @@
 
         console.log(data);
         for (var i = 0; i < data.length; i++) {
-            var table = $("#");
+            var table = $("#tableSection");
             var list = $("<li class='list-group-item'>");
             list.append(
                 $("<h1>").text("Table # " + (i + 1)),
@@ -86,10 +82,10 @@
 function waitList() {
     $.get({url: "/api/waitingList", method: "GET"})
     .then(function(data) {
-
+      
         console.log(data);
         for (var i = 0; i < data.length; i++) {
-            var table = $("#");
+            var table = $("#waitlistSection");
             var list = $("<li class='list-group-item'>");
             list.append(
                 $("<h1>").text("Table # " + (i + 1)),

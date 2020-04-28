@@ -2,12 +2,8 @@
 <html>
   <head>
     <title>Hot Restaurant</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+      <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
@@ -19,12 +15,12 @@
         <h2 class="text-center">Book your seat before they are all gone!</h2>
         <br />
         <div class="text-center">
-          <a href="/view.html"
+          <a href="/view"
             ><button type="button" class="btn btn-lg btn-primary">
               <span class="glyphicon glyphicon-list-alt"></span> View Tables
             </button></a
           >
-          <a href="/home.html"
+          <a href="/"
             ><button type="button" class="btn btn-lg btn-default">
               <span class="glyphicon glyphicon-home"></span>
             </button></a
@@ -68,25 +64,35 @@
         <div class="container">
           <p>
             <a href="/api/reservations">API Table Link</a> |
-            <a href="/api/waitinglist">API Wait List</a>
+            <a href="/api/waitingList">API Wait List</a>
           </p>
         </div>
       </footer>
     </div>
     <script>
-    $("#submit").on("click", function(event) {
+    $("#run-search").on("click", function(event) {
     event.preventDefault();
     var newReservation = {
         name: $("#name").val().trim(),
         phoneNumber: $("#phoneNumber").val().trim(),
         email: $("#email").val().trim(),
-        uniqueId: $("#id").val().trim()
+        uniqueId: $("#uniqueId").val().trim()
     };
-
 
     $.post("/api/reservations", newReservation)
         .then(function(data) {
             console.log("reserve.html", data);
+    })
+
+    $.get('/api/reservations',function(req,res){
+      for(let i = 0; i < res.length; i++){
+        if (res[i] <= 5){
+          return alert("Sorry you're on the waiting list")
+        } else {
+          return alert("congrats we found you a table!")
+          
+        }
+      }
     })
 })
     

@@ -57,7 +57,7 @@
                   <input type="text" class="form-control" id="uniqueId" />
                 </div>
                 <button type="submit" class="btn btn-primary" id="run-search">
-                  Sumbit
+                  Submit
                 </button>
               </form>
             </div>
@@ -73,5 +73,24 @@
         </div>
       </footer>
     </div>
+    <script>
+    $("#submit").on("click", function(event) {
+    event.preventDefault();
+    var newReservation = {
+        name: $("#name").val().trim(),
+        phoneNumber: $("#phoneNumber").val().trim(),
+        email: $("#email").val().trim(),
+        uniqueId: $("#id").val().trim()
+    };
+
+
+    $.post("/api/reservations", newReservation)
+        .then(function(data) {
+            console.log("reserve.html", data);
+    })
+})
+    
+    </script>
+
   </body>
 </html>

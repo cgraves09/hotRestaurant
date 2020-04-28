@@ -10,8 +10,7 @@ app.use(express.json());
 
 //  Data
 
-var reservation = [];
-var waitlist = [];
+
 
 // Routes
 app.get('/', function(req,res){
